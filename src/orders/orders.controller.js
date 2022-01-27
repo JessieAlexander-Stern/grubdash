@@ -8,7 +8,7 @@ const nextId = require("../utils/nextId");
 
 // TODO: Implement the /orders handlers needed to make the tests pass
 
-const orderExists = (req, res, next) => {
+function orderExists  (req, res, next)  {
   const { orderId } = req.params;
   const foundOrder = orders.find((order) => order.id == orderId);
   if (foundOrder) {
@@ -21,7 +21,7 @@ const orderExists = (req, res, next) => {
   });
 };
 
-const checkOrder = (req, res, next) => {
+function checkOrder (req, res, next)  {
   const {
     data: { deliverTo, mobileNumber, status, dishes },
   } = req.body;
@@ -57,20 +57,20 @@ const checkOrder = (req, res, next) => {
   next();
 };
 
-const list = (req, res, next) => {
+function list (req, res, next) {
   res.json({ data: orders });
 };
 
-const read = (req, res, next) => {
+function read  (req, res, next)  {
   res.json({ data: res.locals.order });
 };
 
-const create = (req, res, next) => {
+function create  (req, res, next)  {
   orders.push(res.locals.newOrder);
   res.status(201).json({ data: res.locals.newOrder });
 };
 
-const update = (req, res, next) => {
+function update  (req, res, next)  {
   const { orderId } = req.params;
   const originalOrder = res.locals.order;
   const {
@@ -100,7 +100,7 @@ const update = (req, res, next) => {
   res.json({ data: res.locals.order });
 };
 
-const destroy = (req, res, next) => {
+function destroy  (req, res, next)  {
   if (res.locals.order.status !== "pending")
     return next({
       status: 400,
