@@ -8,7 +8,7 @@ const nextId = require("../utils/nextId");
 
 // TODO: Implement the /dishes handlers needed to make the tests pass
 
-const dishExists = (req, res, next) => {
+function dishExists (req, res, next) {
   const { dishId } = req.params;
   const foundDish = dishes.find((dish) => dish.id === dishId);
   if (foundDish) {
@@ -21,7 +21,7 @@ const dishExists = (req, res, next) => {
   });
 };
 
-const checkDish = (req, res, next) => {
+function checkDish (req, res, next) {
   const {
     data: { name, description, price, image_url },
   } = req.body;
@@ -50,20 +50,20 @@ const checkDish = (req, res, next) => {
   }
 };
 
-const create = (req, res, next) => {
+function create  (req, res, next) {
   dishes.push(res.locals.newDish);
   res.status(201).json({ data: res.locals.newDish });
 };
 
-const read = (req, res, next) => {
+function read  (req, res, next) {
   res.json({ data: res.locals.foundDish });
 };
 
-const list = (req, res, next) => {
+function list  (req, res, next)  {
   res.json({ data: dishes });
 };
 
-const update = (req, res, next) => {
+function update  (req, res, next)  {
   const originalDish = res.locals.foundDish;
   const {
     data: { id, name, price, description, image_url },
